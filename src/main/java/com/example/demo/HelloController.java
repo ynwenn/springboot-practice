@@ -1,23 +1,22 @@
 package com.example.demo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HelloController {
 
     @GetMapping("/hello")
-    public String hello(Model model) {
+    public String hello() {
+        return "hello";
+    }
 
-        List<String> fruits = new ArrayList<>();
-        fruits.add("apple");
-        fruits.add("orange");
-        fruits.add("banana");
+    @PostMapping("/hello")
+    public String helloPost(@RequestParam("name") String name, Model model) {
 
-        model.addAttribute("fruits", fruits);
+        String message = "こんにちは、" + name + "さん！";
+
+        model.addAttribute("message", message);
 
         return "hello";
     }

@@ -6,10 +6,13 @@
 </head>
 <body>
     <h1>Hello Spring!</h1>
-    <p>これはHTMLです</p>
 
-    <ul>
-        <li th:each="fruit : ${fruits}" th:text="${fruit}"></li>
-    </ul>
+<form action="/hello" method="post">
+    <input type="text" name="name">
+    <button type="submit">送信</button>
+</form>
+
+<p th:text="${message}"></p>
+
 </body>
 </html>
