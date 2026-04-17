@@ -12,7 +12,16 @@
     <button type="submit">送信</button>
 </form>
 
-<p th:text="${message}"></p>
+<ul>
+    <li th:each="name : ${names}">
+        <span th:text="${name.name}"></span>
+
+        <form action="/delete" method="post" style="display:inline;">
+            <input type="hidden" name="id" th:value="${name.id}">
+            <button type="submit">削除</button>
+        </form>
+    </li>
+</ul>
 
 </body>
 </html>
