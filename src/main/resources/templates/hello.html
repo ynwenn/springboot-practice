@@ -5,7 +5,8 @@
     <title>Hello</title>
 </head>
 <body>
-    <h1>Hello Spring!</h1>
+
+<h1>名前管理アプリ</h1>
 
 <form action="/hello" method="post">
     <input type="text" name="name">
@@ -16,6 +17,10 @@
     <li th:each="name : ${names}">
         <span th:text="${name.name}"></span>
 
+        <!-- 編集ボタン -->
+        <a th:href="@{/edit(id=${name.id})}">編集</a>
+
+        <!-- 削除ボタン -->
         <form action="/delete" method="post" style="display:inline;">
             <input type="hidden" name="id" th:value="${name.id}">
             <button type="submit">削除</button>

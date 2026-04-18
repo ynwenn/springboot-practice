@@ -27,4 +27,16 @@ public class HelloService {
     public void deleteName(Long id) {
         nameRepository.deleteById(id);
     }
+
+    public Name findById(Long id) {
+        return nameRepository.findById(id).orElse(null);
+    }
+
+    public void updateName(Long id, String name) {
+        Name nameEntity = nameRepository.findById(id).orElse(null);
+        if (nameEntity != null) {
+            nameEntity.setName(name);
+            nameRepository.save(nameEntity);
+        }
+    }
 }
