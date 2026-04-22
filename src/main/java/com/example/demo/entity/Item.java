@@ -16,6 +16,8 @@ public class Item {
     @NotBlank(message = "名前を入力してください")
     private String item;
 
+    private boolean completed = false;
+
     public Item() {}
 
     public Long getId() {
@@ -32,5 +34,13 @@ public class Item {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
