@@ -38,4 +38,12 @@ public class ItemService {
             itemRepository.save(itemEntity);
         }
     }
+
+    public void toggleComplete(Long id) {
+        Item item = itemRepository.findById(id).orElse(null);
+        if (item != null) {
+            item.setCompleted(!item.isCompleted());
+            itemRepository.save(item);
+        }
+    }
 }

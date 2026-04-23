@@ -70,4 +70,13 @@ public class ItemController {
         return "redirect:/items";
     }
 
+    // 完了
+    @PostMapping("/complete")
+    public String complete(@RequestParam("id") Long id) {
+
+        itemService.toggleComplete(id);
+
+        return "redirect:/items";
+    }
+
 }

@@ -4,27 +4,49 @@
     <meta charset="UTF-8">
     <title>Item List</title>
 </head>
-<body>
+<body style="font-family: Arial; margin: 40px;">
 
-<h1>名前管理アプリ</h1>
+<h1>Todoアプリ</h1>
 
-<form action="/items" method="post">
-    <input type="text" name="item">
-    <button type="submit">送信</button>
+<form action="/items" method="post" style="margin-bottom: 20px;">
+    <input type="text" name="item" style="padding: 5px;">
+    <button type="submit">追加</button>
 </form>
 
-<ul>
-    <li th:each="listItem : ${items}">
-        <span th:text="${listItem.item}"></span>
+<ul style="list-style: none; padding: 0;">
+    <li th:each="listItem : ${items}"
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
 
-        <!-- 編集ボタン -->
-        <a th:href="@{/edit(id=${listItem.id})}">編集</a>
+        <!-- 左側：タスク -->
+        <div>
+            <span th:if="${listItem.completed}"
+                  style="text-decoration: line-through; color: gray;"
+                  th:text="${listItem.item}"></span>
 
-        <!-- 削除ボタン -->
-        <form action="/delete" method="post" style="display:inline;">
-            <input type="hidden" name="id" th:value="${listItem.id}">
-            <button type="submit">削除</button>
-        </form>
+            <span th:if="${!listItem.completed}"
+                  th:text="${listItem.item}"></span>
+
+            <!-- 完了・未完了 -->
+            [<span th:text="${listItem.completed} ? '完了' : '未完了'"></span>]
+        </div>
+
+        <!-- 右側：ボタン -->
+        <div>
+            <!-- 完了ボタン -->
+            <form action="/complete" method="post" style="display:inline; margin-right: 5px;">
+                <input type="hidden" name="id" th:value="${listItem.id}">
+                <button type="submit">完了</button>
+            </form>
+
+            <!-- 編集ボタン -->
+            <a th:href="@{/edit(id=${listItem.id})}" style="margin-right: 5px">編集</a>
+
+            <!-- 削除ボタン -->
+            <form action="/delete" method="post" style="display:inline;">
+                <input type="hidden" name="id" th:value="${listItem.id}">
+                <button type="submit">削除</button>
+            </form>
+        </div>
 
     </li>
 </ul>
