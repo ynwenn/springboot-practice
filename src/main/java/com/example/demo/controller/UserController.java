@@ -5,6 +5,7 @@ import com.example.demo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -38,8 +39,44 @@ public class UserController {
 
     // 一覧表示
     @GetMapping("/users")
-    public String list(Model model) {
+    public String list(Model model, HttpSession session) {
+
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/login";
+        }
+
         model.addAttribute("users", userService.getUsers());
         return "users";
+    }
+
+    // ログイン
+    @GetMapping("/login")
+    public String showLogin() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(
+            @RequestParam String username,
+            @RequestParam String password,
+            Model model,
+            HttpSession session
+    ) {
+        User user = userService.findByUsername(username);
+
+        if (user != null && user.getPassword().equals(password)) {
+            session.setAttribute("loginUser", user);
+            return "redirect:/users";
+        } else {
+            model.addAttribute("error", "ログイン失敗");
+            return "login";
+        }
+    }
+
+    // ログアウト
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // セッション削除
+        return "redirect:/login";
     }
 }

@@ -8,6 +8,10 @@
 
 <h1>ユーザー一覧</h1>
 
+<div style="margin-bottom: 20px;">
+    <a href="/logout">ログアウト</a>
+</div>
+
 <ul>
     <li th:each="user : ${users}">
         <span th:text="${user.username}"></span>

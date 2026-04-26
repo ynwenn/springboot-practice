@@ -22,4 +22,13 @@ public class UserService {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
+
+    public User findByUsername(String username) {
+        return userRepository.findAll()
+                .stream()
+                .filter(u -> u.getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
+    }
 }
+
