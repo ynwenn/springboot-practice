@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>掲示板</title>
+</head>
+<body style="margin: 40px; font-family: Arial;">
+
+<h1>掲示板</h1>
+
+<div style="margin-bottom: 20px;">
+    <form action="/posts" method="post" style="display: flex; gap: 10px;">
+        <input type="text" name="content" style="flex: 1; padding: 5px;" placeholder="投稿内容">
+        <button type="submit">投稿</button>
+</form>
+
+<ul style="list-style: none; padding: 0;
+">
+    <li th:each="post : ${posts}"
+        style="display: flex;
+               justify-content: space-between;
+               align-items: center;
+               border-bottom: 1px solid #ccc;
+               padding: 10px 0;">
+
+        <!-- 左側：投稿内容 -->
+        <div style="flex: 1;">
+
+            <span th:text="${post.content}"></span>
+
+            <!-- ユーザー名表示 -->
+            <span th:text="${post.user != null ? post.user.username : '不明'}"
+                  style="color: gray; margin-left: 10px; font-size: 0.9em;">
+            </span>
+
+        </div>
+
+        <!-- 右側：削除ボタン -->
+        <div>
+
+            <form th:if="${loginUser != null and post.user.id == loginUser.id}"
+                  action="/deletePost" method="post" style="display: inline;">
+
+                <input type="hidden" name="id" th:value="${post.id}">
+                <button type="submit">削除</button>
+
+            </form>
+
+        </div>
+
+    </li>
+</ul>
+
+</body>
+</html>
