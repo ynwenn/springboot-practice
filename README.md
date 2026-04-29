@@ -5,11 +5,11 @@ Spring Bootの学習として複数のWebアプリを作成しました。
 
 ## ポートフォリオ一覧
 ① Todoリスト
-TodoController / TodoService / TodoRepository / list.html / edit.html で構成しています。
+TodoController / TodoService / TodoRepository などで構成しています。
 ② ユーザー管理アプリ
-UserController / UserService / UserRepository / users.html / register.html / login.htmlで構成しています。
+UserController / UserService / UserRepository などで構成しています。
 ③ 掲示板アプリ
-PostController / PostService / PostRepository / posts.html で構成しています。
+PostController / PostService / PostRepository などで構成しています。
 
 ※ 各アプリの詳細は下記に記載しています。
 
